@@ -18,7 +18,7 @@ export const TaskCreator = ({ createNewTask }) => {
         onChange={(e) => setNewTaskName(e.target.value)}
       />
 
-      <button>Agregar</button>
+      <button>AGREGAR TAREA</button>
     </form>
   );
 };

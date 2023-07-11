@@ -17,6 +17,30 @@
 .logo.react:hover {
   filter: drop-shadow(0 0 2em #61dafbaa);
 }
+input{
+  background-color: rgb(220, 167, 255);
+  color: black;
+
+}
+
+table {
+  width: 100%;
+  border: 1px solid #000;
+  text-align: center;
+}
+th, td {
+  width: 25%;
+  text-align: left;
+  vertical-align: top;
+  border: 1px solid #000;
+  border-collapse: collapse;
+  padding: 0.3em;
+  text-align: center;
+}
+caption {
+  padding: 0.3em;
+  text-align: center;
+}
 
 @keyframes logo-spin {
   from {
@@ -25,6 +49,7 @@
   to {
     transform: rotate(360deg);
   }
+
 }
 
 @media (prefers-reduced-motion: no-preference) {
