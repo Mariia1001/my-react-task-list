@@ -3,6 +3,7 @@ import "./App.css";
 import { TaskCreator } from "./componentes/TaskCreator";
 import { TaskTable } from "./componentes/TaskTable";
 import { VisibilityControl } from "./componentes/VisibilityControl";
+import LoginForm from './componentes/LoginForm'
 
 function App() {
   const [tasksItems, setTasksItems] = useState([])
@@ -12,6 +13,7 @@ function App() {
     //console.log(taskName)
     if (!tasksItems.find(task => task.name === taskName)){
       setTasksItems([...tasksItems, {name: taskName, done: false}])
+
     }
   }
 
@@ -41,6 +43,9 @@ function App() {
 
   return (
     <div className="App">
+      <LoginForm />
+      <br />
+      <br />
       <TaskCreator createNewTask={createNewTask} />
       <TaskTable tasks={tasksItems} toggleTask={toggleTask}/>
       <VisibilityControl 
@@ -48,6 +53,7 @@ function App() {
       setShowCompleted={(checked) => setShowCompleted(checked)}
       cleanTasks={cleanTasks}
       />
+      
 
     {
       showCompleted == true && (
