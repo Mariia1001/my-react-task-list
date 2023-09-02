@@ -3,7 +3,14 @@ import "./App.css";
 import { TaskCreator } from "./componentes/TaskCreator";
 import { TaskTable } from "./componentes/TaskTable";
 import { VisibilityControl } from "./componentes/VisibilityControl";
-import LoginForm from './componentes/LoginForm'
+import LoginForm from './componentes/LoginForm';
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { Home } from "./componentes/Home";
+import { Tareas } from "./componentes/Tareas";
+import { SobreNosotros } from "./componentes/SobreNosotros";
+import  Menu from './componentes/Menu';
+
+
 
 function App() {
   const [tasksItems, setTasksItems] = useState([])
@@ -21,8 +28,6 @@ function App() {
     setTasksItems(
       tasksItems.map(t => (t.name === task.name) ? {...t, done:!t.done}: t)
     )
-   
-
   }
 
   useEffect(() => {
@@ -42,10 +47,12 @@ function App() {
   }, [ tasksItems ])
 
   return (
+    
     <div className="App">
       <LoginForm />
       <br />
       <br />
+      
       <TaskCreator createNewTask={createNewTask} />
       <TaskTable tasks={tasksItems} toggleTask={toggleTask}/>
       <VisibilityControl 
@@ -53,14 +60,22 @@ function App() {
       setShowCompleted={(checked) => setShowCompleted(checked)}
       cleanTasks={cleanTasks}
       />
-      
+      <br />
 
+      <BrowserRouter>
+      <Menu />
+      <Routes>
+      <Route exact path="/" componentes={<Home />} />
+      <Route path="/Tareas" componentes={<Tareas />} />
+      <Route path="/SobreNosotros" componentes={<SobreNosotros />} />
+      </Routes>
+    </BrowserRouter>
+    
     {
       showCompleted == true && (
         <TaskTable tasks={tasksItems} toggleTask={toggleTask} showCompleted={showCompleted}/>
       )
     }
-
     </div>
   );
 }
