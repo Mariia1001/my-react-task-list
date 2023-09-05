@@ -1,57 +1,54 @@
 
 import React, { useState } from 'react';
+import { useForm, Controller } from 'react-hook-form';
+import { Input, Button, Box, Heading, Text } from '@chakra-ui/react';
 
-const LoginForm = () => {
-  const [name, setName] = useState('');
-  const [email, setEmail] = useState('');
-
-  const handleFormSubmit = (event) => {
-    event.preventDefault();
-
-    if (!isValidEmail(email)) {
-      console.log('Correo electrónico no válido');
-      return;
-    }
-  
-    const isAuthenticated = authenticateUser(name, email);
-    if (isAuthenticated) {
-      console.log('Usuario autenticado:', name);
-    } else {
-      console.log('Usuario no autenticado');
-    }
-
+const LoginForm = ({ onLogin }) => {
+  const { handleSubmit, control } = useForm();
+  const onSubmit = (data) => {
+    // Procesar datos de inicio de sesión
+    onLogin(data);
   };
-    console.log('Nombre:', name);
-    console.log('Correo electrónico:', email);
-  
 
   return (
-    <div>
-      <h2>Bienvenidos a mi lista de tareas</h2>
-      <form onSubmit={handleFormSubmit}>
-        <div>
-          <label>Nombre:</label>
-          <input
-            type="text"
-            value={name}
-            onChange={(e) => setName(e.target.value)}
-            required
-          />
-        </div>
-        <div>
-          <label>Correo electrónico:</label>
-          <input
-            type="email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            required
-          />
-        </div>
-        <button type="submit">Ingresar</button>
+    <Box maxW="400px" mx="auto">
+      <Heading as="h2" mb="4">
+        Iniciar sesión
+      </Heading>
+      <form onSubmit={handleSubmit(onSubmit)}>
+        <Controller
+          name="name"
+          control={control}
+          defaultValue=""
+          render={({ field }) => (
+            <Input
+              {...field}
+              placeholder="Nombre"
+              mb="4"
+              required
+            />
+          )}
+        />
+        <Controller
+          name="email"
+          control={control}
+          defaultValue=""
+          render={({ field }) => (
+            <Input
+              {...field}
+              type="email"
+              placeholder="Correo electrónico"
+              mb="4"
+              required
+            />
+          )}
+        />
+        <Button type="submit" colorScheme="blue">
+          Ingresar
+        </Button>
       </form>
-    </div>
+    </Box>
   );
-  };
-
+};
 
 export default LoginForm;
